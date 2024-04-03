@@ -1,18 +1,25 @@
 package com.uala.microblogging.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class User {
     private final String id;
     private final String name;
     private final String lastName;
-    private final List<User> following;
+    private final Set<User> following;
 
     private User(Builder builder) {
         id = builder.id;
         name = builder.name;
         lastName = builder.lastName;
-        following = builder.following;
+        following = buildFollowing(builder);
+    }
+
+    private Set<User> buildFollowing(final Builder builder) {
+        if(builder.following != null)
+            return builder.following;
+        return new HashSet<>();
     }
 
     public String id() {
@@ -27,8 +34,12 @@ public final class User {
         return lastName;
     }
 
-    public List<User> following() {
+    public Set<User> following() {
         return following;
+    }
+
+    public void addFollowing(final User followingUser) {
+        this.following.add(followingUser);
     }
 
 
@@ -39,7 +50,7 @@ public final class User {
         private String id;
         private String name;
         private String lastName;
-        private List<User> following;
+        private Set<User> following;
 
         private Builder() {
         }
@@ -87,7 +98,7 @@ public final class User {
          * @param following the {@code following} to set
          * @return a reference to this Builder
          */
-        public Builder following(List<User> following) {
+        public Builder following(Set<User> following) {
             this.following = following;
             return this;
         }

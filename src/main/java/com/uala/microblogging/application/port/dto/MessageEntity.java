@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "messages")
-public final class MessageDto {
+public final class MessageEntity {
     @Id
     @GeneratedValue
     private UUID uuid;
@@ -24,9 +24,9 @@ public final class MessageDto {
 
     @ManyToOne
     @JoinColumn(name = "id")
-    private final UserDto createdBy;
+    private final UserEntity createdBy;
 
-    public MessageDto(final String text, final LocalDateTime creationDate, final UserDto createdBy) {
+    public MessageEntity(final String text, final LocalDateTime creationDate, final UserEntity createdBy) {
         this.text = text;
         this.creationDate = creationDate;
         this.createdBy = createdBy;
@@ -44,7 +44,7 @@ public final class MessageDto {
         return creationDate;
     }
 
-    public UserDto getCreatedBy() {
+    public UserEntity getCreatedBy() {
         return createdBy;
     }
 }

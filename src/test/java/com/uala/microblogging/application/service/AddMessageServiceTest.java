@@ -3,8 +3,9 @@ package com.uala.microblogging.application.service;
 
 import com.uala.microblogging.application.port.MessageRepository;
 import com.uala.microblogging.application.port.UserRepository;
-import com.uala.microblogging.application.port.dto.AddMessageRequest;
-import com.uala.microblogging.application.port.dto.MessageDto;
+import com.uala.microblogging.application.port.dto.MessageEntity;
+import com.uala.microblogging.application.port.dto.UserEntity;
+import com.uala.microblogging.model.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -13,9 +14,9 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static com.uala.microblogging.application.port.dto.AddMessageRequestTest.MESSAGE_TEXT;
-import static com.uala.microblogging.application.port.dto.AddMessageRequestTest.getAddMessageRequest;
-import static com.uala.microblogging.application.port.dto.UserDtoTest.getTestUserDto;
+import static com.uala.microblogging.adapter.rest.dto.AddMessageRequestTest.MESSAGE_TEXT;
+import static com.uala.microblogging.application.port.dto.UserEntityTest.getTestUserEntity;
+import static com.uala.microblogging.model.MessageTest.getTestUser;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -40,12 +41,12 @@ class AddMessageServiceTest {
     @Test
     void givenMessageWhenAddThenSuccess() {
         // given
-        final AddMessageRequest request = getAddMessageRequest();
+        final Message message = getTestMessage();
         when(this.messageRepository.save(any())).thenReturn(getTestMessageDto());
-        when(this.userRepository.findById(any())).thenReturn(Optional.of(getTestUserDto()));
+        when(this.userRepository.findById(any())).thenReturn(Optional.of(getTestUserEntity()));
 
         // when
-        this.service.add(request.toMessage());
+        this.service.add(message);
 
         // then
         verify(this.messageRepository).save(any());
@@ -54,19 +55,23 @@ class AddMessageServiceTest {
     @Test
     void givenMessageWhenNotExistsUserThenThrowException() {
         // given
-        final AddMessageRequest request = getAddMessageRequest();
+        final Message message = getTestMessage();
         when(this.messageRepository.save(any())).thenReturn(getTestMessageDto());
         when(this.userRepository.findById(any())).thenReturn(Optional.empty());
 
         // then
         assertThrows(IllegalArgumentException.class, () -> {
             // when
-            this.service.add(request.toMessage());
+            this.service.add(message);
         });
     }
 
 
-    private static MessageDto getTestMessageDto() {
-        return new MessageDto(MESSAGE_TEXT, LocalDateTime.now(), getTestUserDto());
+    private static MessageEntity getTestMessageDto() {
+        return new MessageEntity(MESSAGE_TEXT, LocalDateTime.now(), getTestUserEntity());
+    }
+
+    private Message getTestMessage() {
+        return new Message(MESSAGE_TEXT, LocalDateTime.now(), getTestUser());
     }
 }

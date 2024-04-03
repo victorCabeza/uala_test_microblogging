@@ -2,7 +2,7 @@ package com.uala.microblogging.adapter.rest;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uala.microblogging.application.port.dto.AddMessageRequest;
+import com.uala.microblogging.adapter.rest.dto.AddMessageRequest;
 import com.uala.microblogging.application.service.AddMessageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.uala.microblogging.application.port.dto.AddMessageRequestTest.getAddMessageRequest;
+import static com.uala.microblogging.adapter.rest.dto.AddMessageRequestTest.getAddMessageRequest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;

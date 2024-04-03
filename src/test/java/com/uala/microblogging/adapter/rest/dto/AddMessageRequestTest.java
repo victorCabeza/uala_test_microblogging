@@ -1,4 +1,4 @@
-package com.uala.microblogging.application.port.dto;
+package com.uala.microblogging.adapter.rest.dto;
 
 
 import com.uala.microblogging.model.Message;

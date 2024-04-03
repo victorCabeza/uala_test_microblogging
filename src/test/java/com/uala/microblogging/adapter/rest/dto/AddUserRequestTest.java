@@ -1,6 +1,7 @@
-package com.uala.microblogging.application.port.dto;
+package com.uala.microblogging.adapter.rest.dto;
 
 
+import com.uala.microblogging.model.User;
 import org.junit.jupiter.api.Test;
 
 import static com.uala.microblogging.model.MessageTest.USER_ID;
@@ -13,12 +14,12 @@ public class AddUserRequestTest {
         final AddUserRequest request = getAddUserRequest();
 
         // when
-        final UserDto userDto = request.toUserDto();
+        final User user = request.toUser();
 
         // then
-        assertEquals(request.id(), userDto.getId());
-        assertEquals(request.name(), userDto.getName());
-        assertEquals(request.lastName(), userDto.getLastName());
+        assertEquals(request.id(), user.id());
+        assertEquals(request.name(), user.name());
+        assertEquals(request.lastName(), user.lastName());
     }
 
 

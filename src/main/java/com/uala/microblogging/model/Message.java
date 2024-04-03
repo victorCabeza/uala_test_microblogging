@@ -4,7 +4,6 @@ import com.uala.microblogging.model.exceptions.TextOversizeException;
 import org.apache.logging.log4j.util.Strings;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public record Message(String text, LocalDateTime creationDate, User createdBy) {
     private static final int TEXT_LIMIT = 280;

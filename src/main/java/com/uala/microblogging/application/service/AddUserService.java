@@ -2,7 +2,8 @@ package com.uala.microblogging.application.service;
 
 import com.uala.microblogging.application.port.AddUserUseCase;
 import com.uala.microblogging.application.port.UserRepository;
-import com.uala.microblogging.application.port.dto.AddUserRequest;
+import com.uala.microblogging.model.User;
+import com.uala.microblogging.application.port.dto.UserEntity;
 
 public class AddUserService implements AddUserUseCase {
     private final UserRepository userRepository;
@@ -12,7 +13,7 @@ public class AddUserService implements AddUserUseCase {
     }
 
     @Override
-    public void add(final AddUserRequest request) {
-        this.userRepository.save(request.toUserDto());
+    public void add(final User user) {
+        this.userRepository.save(UserEntity.from(user));
     }
 }

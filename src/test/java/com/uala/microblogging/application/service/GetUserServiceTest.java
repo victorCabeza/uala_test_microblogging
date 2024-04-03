@@ -1,6 +1,6 @@
 package com.uala.microblogging.application.service;
 
-
+import com.uala.microblogging.application.port.GetUserUseCase;
 import com.uala.microblogging.application.port.UserRepository;
 import com.uala.microblogging.application.port.dto.UserEntity;
 import com.uala.microblogging.model.User;
@@ -11,31 +11,35 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
+import static com.uala.microblogging.application.port.dto.UserEntityTest.getTestUserEntity;
 import static com.uala.microblogging.model.MessageTest.getTestUser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class AddUserServiceTest {
+
+class GetUserServiceTest {
     @Mock
     private UserRepository userRepository;
-    private AddUserService service;
+
+    private GetUserUseCase service;
 
     @BeforeEach
     public void init() {
         MockitoAnnotations.initMocks(this);
-        this.service = new AddUserService(userRepository);
+        this.service = new GetUserService(userRepository);
     }
+
     @Test
-    void givenAddUserRequestWhenAddUserThenSuccess() {
+    void givenExistingUserWhenGetThenObtainExistingUser() {
         // given
         final User user = getTestUser();
-        when(this.userRepository.findById(any())).thenReturn(Optional.of(UserEntity.from(user)));
+        when(this.userRepository.findById(any())).thenReturn(Optional.of(getTestUserEntity()));
 
         // when
-        this.service.add(user);
+        final User userReturned = this.service.get(user.id()).get();
 
         // then
-        verify(this.userRepository).save(any());
+        assertEquals(user.id() , userReturned.id());
     }
 }
