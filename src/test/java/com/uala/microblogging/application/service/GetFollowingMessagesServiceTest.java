@@ -1,7 +1,7 @@
 package com.uala.microblogging.application.service;
 
 
-import com.uala.microblogging.application.port.GetFollowingMessagesUseCase;
+import com.uala.microblogging.application.port.GetTimelineUseCase;
 import com.uala.microblogging.application.port.MessageRepository;
 import com.uala.microblogging.model.Message;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +21,12 @@ class GetFollowingMessagesServiceTest {
     @Mock
     private MessageRepository messageRepository;
 
-    private GetFollowingMessagesUseCase getFollowingMessagesUseCase;
+    private GetTimelineUseCase getTimelineUseCase;
 
     @BeforeEach
     public void init() {
         MockitoAnnotations.initMocks(this);
-        this.getFollowingMessagesUseCase = new GetFollowingMessagesService(messageRepository);
+        this.getTimelineUseCase = new GetTimelineService(messageRepository);
     }
 
     @Test
@@ -35,7 +35,7 @@ class GetFollowingMessagesServiceTest {
         when(messageRepository.findMessagesByFollowedUsers(any())).thenReturn(List.of(getTestMessageEntity()));
 
         // when
-        final List<Message> messages = this.getFollowingMessagesUseCase.get(USER_ID);
+        final List<Message> messages = this.getTimelineUseCase.get(USER_ID);
 
         // then
         assertEquals(1, messages.size());

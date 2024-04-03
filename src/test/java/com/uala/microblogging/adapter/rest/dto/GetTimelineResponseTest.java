@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static com.uala.microblogging.model.MessageTest.getTestMessage;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GetFollowingMessageResponseTest {
+class GetTimelineResponseTest {
     @Test
     void givenMessageWhenFromThenSuccess() {
         // given
         final Message message = getTestMessage();
 
         // when
-        final GetFollowingMessageResponse response = GetFollowingMessageResponse.from(message);
+        final GetTimelineResponse response = GetTimelineResponse.from(message);
 
         // Assert
         assertNotNull(response);

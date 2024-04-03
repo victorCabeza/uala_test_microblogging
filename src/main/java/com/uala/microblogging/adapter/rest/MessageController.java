@@ -1,12 +1,10 @@
 package com.uala.microblogging.adapter.rest;
 
 import com.uala.microblogging.adapter.rest.dto.AddMessageRequest;
-import com.uala.microblogging.adapter.rest.dto.GetFollowingMessageResponse;
-import com.uala.microblogging.adapter.rest.dto.GetUserResponse;
+import com.uala.microblogging.adapter.rest.dto.GetTimelineResponse;
 import com.uala.microblogging.application.port.AddMessageUseCase;
-import com.uala.microblogging.application.port.GetFollowingMessagesUseCase;
+import com.uala.microblogging.application.port.GetTimelineUseCase;
 import com.uala.microblogging.model.Message;
-import com.uala.microblogging.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/message")
@@ -29,7 +26,7 @@ public class MessageController {
     private AddMessageUseCase addMessageUseCase;
 
     @Autowired
-    private GetFollowingMessagesUseCase getFollowingMessagesUseCase;
+    private GetTimelineUseCase getTimelineUseCase;
 
     @PostMapping()
     public ResponseEntity<AddMessageRequest> addMessage(@RequestBody AddMessageRequest request) {
@@ -39,8 +36,8 @@ public class MessageController {
 
 
     @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GetFollowingMessageResponse>> getUser(@PathVariable final String userId) {
-        final List<Message> messages = this.getFollowingMessagesUseCase.get(userId);
-        return new ResponseEntity<>(messages.stream().map(GetFollowingMessageResponse::from).toList(), HttpStatus.OK);
+    public ResponseEntity<List<GetTimelineResponse>> getTimeline(@PathVariable final String userId) {
+        final List<Message> messages = this.getTimelineUseCase.get(userId);
+        return new ResponseEntity<>(messages.stream().map(GetTimelineResponse::from).toList(), HttpStatus.OK);
     }
 }

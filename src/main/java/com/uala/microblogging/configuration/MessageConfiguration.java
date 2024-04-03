@@ -1,11 +1,11 @@
 package com.uala.microblogging.configuration;
 
 import com.uala.microblogging.application.port.AddMessageUseCase;
-import com.uala.microblogging.application.port.GetFollowingMessagesUseCase;
+import com.uala.microblogging.application.port.GetTimelineUseCase;
 import com.uala.microblogging.application.port.MessageRepository;
 import com.uala.microblogging.application.port.UserRepository;
 import com.uala.microblogging.application.service.AddMessageService;
-import com.uala.microblogging.application.service.GetFollowingMessagesService;
+import com.uala.microblogging.application.service.GetTimelineService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +17,7 @@ public class MessageConfiguration {
     }
 
     @Bean
-    public GetFollowingMessagesUseCase getFollowingMessagesUseCase(final MessageRepository messageRepository){
-        return new GetFollowingMessagesService(messageRepository);
+    public GetTimelineUseCase getTimeline(final MessageRepository messageRepository){
+        return new GetTimelineService(messageRepository);
     }
 }

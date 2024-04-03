@@ -1,16 +1,16 @@
 package com.uala.microblogging.application.service;
 
-import com.uala.microblogging.application.port.GetFollowingMessagesUseCase;
+import com.uala.microblogging.application.port.GetTimelineUseCase;
 import com.uala.microblogging.application.port.MessageRepository;
 import com.uala.microblogging.application.port.dto.MessageEntity;
 import com.uala.microblogging.model.Message;
 
 import java.util.List;
 
-public class GetFollowingMessagesService implements GetFollowingMessagesUseCase {
+public class GetTimelineService implements GetTimelineUseCase {
     private final MessageRepository messageRepository;
 
-    public GetFollowingMessagesService(final MessageRepository messageRepository) {
+    public GetTimelineService(final MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 
