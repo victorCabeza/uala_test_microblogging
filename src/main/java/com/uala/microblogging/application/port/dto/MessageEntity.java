@@ -1,5 +1,6 @@
 package com.uala.microblogging.application.port.dto;
 
+import com.uala.microblogging.model.Message;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,12 +20,15 @@ public final class MessageEntity {
     private UUID uuid;
 
     @Column(length = 280)
-    private final String text;
-    private final LocalDateTime creationDate;
+    private String text;
+    private LocalDateTime creationDate;
 
     @ManyToOne
     @JoinColumn(name = "id")
-    private final UserEntity createdBy;
+    private UserEntity createdBy;
+
+    public MessageEntity() {
+    }
 
     public MessageEntity(final String text, final LocalDateTime creationDate, final UserEntity createdBy) {
         this.text = text;
@@ -46,5 +50,14 @@ public final class MessageEntity {
 
     public UserEntity getCreatedBy() {
         return createdBy;
+    }
+
+    public Message toMessage() {
+        return Message.Builder.builder()
+                .text(this.text)
+                .creationDate(this.creationDate)
+                .createdBy(this.createdBy.toUser())
+                .uuid(this.uuid)
+                .build();
     }
 }

@@ -4,7 +4,6 @@ package com.uala.microblogging.application.service;
 import com.uala.microblogging.application.port.MessageRepository;
 import com.uala.microblogging.application.port.UserRepository;
 import com.uala.microblogging.application.port.dto.MessageEntity;
-import com.uala.microblogging.application.port.dto.UserEntity;
 import com.uala.microblogging.model.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class AddMessageServiceTest {
+public class AddMessageServiceTest {
 
     @Mock
     private MessageRepository messageRepository;
@@ -42,7 +41,7 @@ class AddMessageServiceTest {
     void givenMessageWhenAddThenSuccess() {
         // given
         final Message message = getTestMessage();
-        when(this.messageRepository.save(any())).thenReturn(getTestMessageDto());
+        when(this.messageRepository.save(any())).thenReturn(getTestMessageEntity());
         when(this.userRepository.findById(any())).thenReturn(Optional.of(getTestUserEntity()));
 
         // when
@@ -56,7 +55,7 @@ class AddMessageServiceTest {
     void givenMessageWhenNotExistsUserThenThrowException() {
         // given
         final Message message = getTestMessage();
-        when(this.messageRepository.save(any())).thenReturn(getTestMessageDto());
+        when(this.messageRepository.save(any())).thenReturn(getTestMessageEntity());
         when(this.userRepository.findById(any())).thenReturn(Optional.empty());
 
         // then
@@ -67,11 +66,15 @@ class AddMessageServiceTest {
     }
 
 
-    private static MessageEntity getTestMessageDto() {
+    public static MessageEntity getTestMessageEntity() {
         return new MessageEntity(MESSAGE_TEXT, LocalDateTime.now(), getTestUserEntity());
     }
 
     private Message getTestMessage() {
-        return new Message(MESSAGE_TEXT, LocalDateTime.now(), getTestUser());
+        return Message.Builder.builder()
+                .text(MESSAGE_TEXT)
+                .creationDate(LocalDateTime.now())
+                .createdBy(getTestUser())
+                .build();
     }
 }

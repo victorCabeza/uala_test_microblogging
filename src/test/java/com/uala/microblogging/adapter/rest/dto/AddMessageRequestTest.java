@@ -20,9 +20,9 @@ public class AddMessageRequestTest {
         final Message message = addMessageRequest.toMessage();
 
         // then
-        assertEquals(addMessageRequest.text(), message.text());
-        assertEquals(addMessageRequest.userId(), message.createdBy().id());
-        assertNotNull(message.creationDate());
+        assertEquals(addMessageRequest.text(), message.getText());
+        assertEquals(addMessageRequest.userId(), message.getCreatedBy().id());
+        assertNotNull(message.getCreationDate());
     }
 
     public static AddMessageRequest getAddMessageRequest() {

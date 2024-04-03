@@ -21,9 +21,9 @@ public class AddMessageService implements AddMessageUseCase {
 
     @Override
     public void add(final Message message) {
-        final String userId = message.createdBy().id();
+        final String userId = message.getCreatedBy().id();
         final Optional<UserEntity> userDto = this.userRepository.findById(userId);
-        this.messageRepository.save(new MessageEntity(message.text(),
+        this.messageRepository.save(new MessageEntity(message.getText(),
                 LocalDateTime.now(),
                 userDto.orElseThrow(() -> new IllegalArgumentException("User not exists with te id %s".formatted(userId)))
                 ));

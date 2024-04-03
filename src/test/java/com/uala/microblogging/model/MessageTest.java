@@ -5,7 +5,9 @@ import com.uala.microblogging.model.exceptions.TextOversizeException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,14 +21,12 @@ sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in volupta""";
     public static final String USER_ID = "user1";
+    public static final String CREATION_DATE = "2024-04-03T10:15:30";
 
     @Test
     void givenUnderLimit280TextSizeMessageWhenCreateMessageThenSuccess() {
         // given
-        final LocalDateTime localDateTime = getTestLocalDateTime();
-        final User user = getTestUser();
-        // when
-        final Message message = new Message(UNDER_LIMIT_TEXT, localDateTime, user);
+        final Message message = getTestMessage();
 
         // then
         assertNotNull(message);
@@ -42,7 +42,11 @@ Duis aute irure dolor in reprehenderit in volupta""";
         // then
         assertThrows(TextOversizeException.class, () -> {
             // when
-            new Message(OVERSIZED_TEXT, localDateTime, user);
+            Message.Builder.builder()
+                    .text(OVERSIZED_TEXT)
+                    .creationDate(localDateTime)
+                    .createdBy(user)
+                    .build();
         });
     }
 
@@ -56,7 +60,10 @@ Duis aute irure dolor in reprehenderit in volupta""";
         // then
         assertThrows(IllegalArgumentException.class, () -> {
             // when
-            new Message(null, localDateTime, user);
+            Message.Builder.builder()
+                    .creationDate(localDateTime)
+                    .createdBy(user)
+                    .build();
         });
     }
 
@@ -71,7 +78,11 @@ Duis aute irure dolor in reprehenderit in volupta""";
         // then
         assertThrows(IllegalArgumentException.class, () -> {
             // when
-            new Message(text, localDateTime, user);
+            Message.Builder.builder()
+                    .text(text)
+                    .creationDate(localDateTime)
+                    .createdBy(user)
+                    .build();
         });
     }
 
@@ -85,7 +96,11 @@ Duis aute irure dolor in reprehenderit in volupta""";
         // then
         assertThrows(IllegalArgumentException.class, () -> {
             // when
-            new Message(UNDER_LIMIT_TEXT, localDateTime, user);
+            Message.Builder.builder()
+                    .text(UNDER_LIMIT_TEXT)
+                    .creationDate(localDateTime)
+                    .createdBy(user)
+                    .build();
         });
     }
 
@@ -98,6 +113,15 @@ Duis aute irure dolor in reprehenderit in volupta""";
     }
 
     private static LocalDateTime getTestLocalDateTime() {
-        return LocalDateTime.now();
+        return LocalDateTime.parse(CREATION_DATE, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
+
+    public static Message getTestMessage() {
+        return Message.Builder.builder()
+                .uuid(UUID.fromString("72a9715a-455f-4a98-ac7f-08e212d226ac"))
+                .text(UNDER_LIMIT_TEXT)
+                .creationDate(getTestLocalDateTime())
+                .createdBy(getTestUser())
+                .build();
     }
 }

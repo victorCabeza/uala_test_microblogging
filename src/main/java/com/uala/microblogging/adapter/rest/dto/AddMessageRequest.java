@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 
 public record AddMessageRequest(String text, String userId) {
     public Message toMessage() {
-        return new Message(this.text, LocalDateTime.now(), User.Builder.builder().id(userId).build());
+        return Message.Builder.builder()
+                .text(this.text)
+                .creationDate(LocalDateTime.now())
+                .createdBy(User.Builder.builder().id(userId).build())
+                .build();
     }
 }
