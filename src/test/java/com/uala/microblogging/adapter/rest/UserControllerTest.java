@@ -2,11 +2,9 @@ package com.uala.microblogging.adapter.rest;
 
 
 import com.uala.microblogging.adapter.rest.dto.AddUserRequest;
-import com.uala.microblogging.application.port.AddUserUseCase;
-import com.uala.microblogging.application.port.GetUserUseCase;
-import com.uala.microblogging.application.service.AddUserService;
+import com.uala.microblogging.application.port.in.AddUserUseCase;
+import com.uala.microblogging.application.port.in.GetUserUseCase;
 import com.uala.microblogging.model.User;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

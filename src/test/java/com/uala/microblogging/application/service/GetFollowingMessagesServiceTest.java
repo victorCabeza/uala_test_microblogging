@@ -1,8 +1,8 @@
 package com.uala.microblogging.application.service;
 
 
-import com.uala.microblogging.application.port.GetTimelineUseCase;
-import com.uala.microblogging.application.port.MessageRepository;
+import com.uala.microblogging.application.port.in.GetTimelineUseCase;
+import com.uala.microblogging.application.port.out.MessageRepository;
 import com.uala.microblogging.model.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

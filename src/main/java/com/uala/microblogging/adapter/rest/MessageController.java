@@ -2,8 +2,8 @@ package com.uala.microblogging.adapter.rest;
 
 import com.uala.microblogging.adapter.rest.dto.AddMessageRequest;
 import com.uala.microblogging.adapter.rest.dto.GetTimelineResponse;
-import com.uala.microblogging.application.port.AddMessageUseCase;
-import com.uala.microblogging.application.port.GetTimelineUseCase;
+import com.uala.microblogging.application.port.in.AddMessageUseCase;
+import com.uala.microblogging.application.port.in.GetTimelineUseCase;
 import com.uala.microblogging.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

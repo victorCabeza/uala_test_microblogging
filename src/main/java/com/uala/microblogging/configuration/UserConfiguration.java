@@ -1,9 +1,9 @@
 package com.uala.microblogging.configuration;
 
-import com.uala.microblogging.application.port.AddFollowingUseCase;
-import com.uala.microblogging.application.port.AddUserUseCase;
-import com.uala.microblogging.application.port.GetUserUseCase;
-import com.uala.microblogging.application.port.UserRepository;
+import com.uala.microblogging.application.port.in.AddFollowingUseCase;
+import com.uala.microblogging.application.port.in.AddUserUseCase;
+import com.uala.microblogging.application.port.in.GetUserUseCase;
+import com.uala.microblogging.application.port.out.UserRepository;
 import com.uala.microblogging.application.service.AddFollowingService;
 import com.uala.microblogging.application.service.AddUserService;
 import com.uala.microblogging.application.service.GetUserService;

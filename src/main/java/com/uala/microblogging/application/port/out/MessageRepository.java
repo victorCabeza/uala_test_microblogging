@@ -1,4 +1,4 @@
-package com.uala.microblogging.application.port;
+package com.uala.microblogging.application.port.out;
 
 import com.uala.microblogging.application.port.dto.MessageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

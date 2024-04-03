@@ -1,7 +1,7 @@
 package com.uala.microblogging.application.service;
 
-import com.uala.microblogging.application.port.AddUserUseCase;
-import com.uala.microblogging.application.port.UserRepository;
+import com.uala.microblogging.application.port.in.AddUserUseCase;
+import com.uala.microblogging.application.port.out.UserRepository;
 import com.uala.microblogging.model.User;
 import com.uala.microblogging.application.port.dto.UserEntity;
 

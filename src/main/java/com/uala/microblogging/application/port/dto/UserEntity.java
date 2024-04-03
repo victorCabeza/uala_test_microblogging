@@ -4,6 +4,8 @@ import com.uala.microblogging.model.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,6 +22,11 @@ public class UserEntity {
     private String lastName;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_follows",
+            joinColumns = @JoinColumn(name = "follower_id"),
+            inverseJoinColumns = @JoinColumn(name = "followed_id")
+    )
     private Set<UserEntity> following;
 
     public UserEntity() {}
@@ -51,9 +58,7 @@ public class UserEntity {
     }
 
     private static Set<UserEntity> buildFollowing(final Set<User> userFollowing) {
-        if(userFollowing != null)
-         return userFollowing.stream().map(UserEntity::from).collect(Collectors.toSet());
-        return Set.of();
+        return userFollowing.stream().map(UserEntity::from).collect(Collectors.toSet());
     }
 
     public String getId() {

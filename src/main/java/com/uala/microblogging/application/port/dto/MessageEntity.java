@@ -24,7 +24,7 @@ public final class MessageEntity {
     private LocalDateTime creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "created_by_id")
     private UserEntity createdBy;
 
     public MessageEntity() {

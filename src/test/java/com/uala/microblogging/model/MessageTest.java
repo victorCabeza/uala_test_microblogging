@@ -104,6 +104,21 @@ Duis aute irure dolor in reprehenderit in volupta""";
         });
     }
 
+    @Test
+    void givenNullCreationDateMessageWhenCreateMessageThenException() {
+        // given
+        final User user = getTestUser();
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> {
+            // when
+            Message.Builder.builder()
+                    .text(UNDER_LIMIT_TEXT)
+                    .createdBy(user)
+                    .build();
+        });
+    }
+
     public static User getTestUser() {
         return User.Builder.builder()
                 .id(USER_ID)

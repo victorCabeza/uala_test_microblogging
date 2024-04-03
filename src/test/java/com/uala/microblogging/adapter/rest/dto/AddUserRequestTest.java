@@ -22,8 +22,6 @@ public class AddUserRequestTest {
         assertEquals(request.lastName(), user.lastName());
     }
 
-
-
     public static AddUserRequest getAddUserRequest() {
         return new AddUserRequest(USER_ID, "name", "lastName");
     }

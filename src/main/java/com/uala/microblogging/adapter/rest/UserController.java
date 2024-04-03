@@ -2,8 +2,8 @@ package com.uala.microblogging.adapter.rest;
 
 import com.uala.microblogging.adapter.rest.dto.AddUserRequest;
 import com.uala.microblogging.adapter.rest.dto.GetUserResponse;
-import com.uala.microblogging.application.port.AddUserUseCase;
-import com.uala.microblogging.application.port.GetUserUseCase;
+import com.uala.microblogging.application.port.in.AddUserUseCase;
+import com.uala.microblogging.application.port.in.GetUserUseCase;
 import com.uala.microblogging.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

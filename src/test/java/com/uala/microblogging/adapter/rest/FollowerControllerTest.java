@@ -2,12 +2,7 @@ package com.uala.microblogging.adapter.rest;
 
 
 import com.uala.microblogging.adapter.rest.dto.AddFollowingRequest;
-import com.uala.microblogging.adapter.rest.dto.AddUserRequest;
-import com.uala.microblogging.application.port.AddFollowingUseCase;
-import com.uala.microblogging.application.port.AddUserUseCase;
-import com.uala.microblogging.application.port.GetUserUseCase;
-import com.uala.microblogging.application.service.AddFollowingService;
-import com.uala.microblogging.model.User;
+import com.uala.microblogging.application.port.in.AddFollowingUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,16 +11,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
-
 import static com.uala.microblogging.adapter.rest.MessageControllerTest.asJsonString;
-import static com.uala.microblogging.adapter.rest.dto.AddUserRequestTest.getAddUserRequest;
-import static com.uala.microblogging.application.service.AddFollowingServiceTest.getTestFollowingUser;
-import static com.uala.microblogging.model.MessageTest.getTestUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

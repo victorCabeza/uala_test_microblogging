@@ -1,9 +1,9 @@
 package com.uala.microblogging.configuration;
 
-import com.uala.microblogging.application.port.AddMessageUseCase;
-import com.uala.microblogging.application.port.GetTimelineUseCase;
-import com.uala.microblogging.application.port.MessageRepository;
-import com.uala.microblogging.application.port.UserRepository;
+import com.uala.microblogging.application.port.in.AddMessageUseCase;
+import com.uala.microblogging.application.port.in.GetTimelineUseCase;
+import com.uala.microblogging.application.port.out.MessageRepository;
+import com.uala.microblogging.application.port.out.UserRepository;
 import com.uala.microblogging.application.service.AddMessageService;
 import com.uala.microblogging.application.service.GetTimelineService;
 import org.springframework.context.annotation.Bean;

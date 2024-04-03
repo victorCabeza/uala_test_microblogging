@@ -1,7 +1,7 @@
 package com.uala.microblogging.adapter.rest;
 
 import com.uala.microblogging.adapter.rest.dto.AddFollowingRequest;
-import com.uala.microblogging.application.port.AddFollowingUseCase;
+import com.uala.microblogging.application.port.in.AddFollowingUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
